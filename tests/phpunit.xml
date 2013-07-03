@@ -1,0 +1,7 @@
+<phpunit bootstrap="bootstrap.php"
+         colors="true"
+>
+    <testsuite name="UnitTestSuite">
+        <directory>./NodePub/Navigation/Tests/</directory>
+    </testsuite>
+</phpunit>
