@@ -1,0 +1,68 @@
+Welcome:
+  path: /
+  slug: home
+  route: blog_home
+    params:
+      foo: bar
+Blog:
+  path: /blog
+  slug: blog
+
+
+
+# NodePub Admin
+
+
+Dashboard:
+  route: 'admin_dashboard'
+Sites:
+  route: 'admin_sites'
+  uri: /foo/bar
+  pages:
+    Sitemap: 'admin_sitemap'
+
+Content:
+
+    
+Design:
+  Themes: 'admin_themes'
+  Templates: 'admin_templates'
+Components:
+  Blocks: 'admin_blocks'
+  Extensions: 'admin_extensions'
+  Node Types: 'admin_node_types'
+Reports:
+  Statistics: 'admin_stats'
+  Logs: 'admin_logs'
+
+# Expanded Syntax
+
+Dashboard:
+  route: 'admin_dashboard'
+Sites:
+  route: 'admin_sites'
+  pages:
+    Sitemap: 'admin_sitemap'
+
+# Design:
+Themes:
+  route: 'admin_themes'
+  pages:
+    Edit Theme:
+    route: 'admin_theme_edit'
+Templates:
+  route: 'admin_templates'
+
+# Components:
+Blocks:
+  route: 'admin_blocks'
+Extensions:
+  route: 'admin_extensions'
+Node Types:
+  route: 'admin_node_types'
+
+# Reports:
+Statistics:
+  route: 'admin_stats'
+Logs:
+  route: 'admin_logs'

@@ -1,0 +1,15 @@
+{% block np_menu %}
+    <div class="np_menu">
+        <ul>
+        {% for item in menu_items %}
+            {% block menu_item %}
+                <li class="np_menu_item np_menu_item_{{ loop.index }}"><a href="{{ item.href }}">{{ item.name }}</a>
+                {% if item.hasChildren %}
+                    {# recurse #}
+                {% endif %}
+                </li>
+            {% endblock %}
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% block breadcrumbs %}
+    <div class="np_breadcrumbs">
+    {% for item in breadcrumb_items %}
+        {% block breadcrumb_item %}
+            <a href="{{ item.href }}" class="np_breadcrumb np_bc_{{ loop.index }}">{{ item.name }}</a>
+        {% endblock %}
+        {% if loop.last == false %}
+            {% block breadcrumb_separator %}
+                <span class="np_breadcrumb_separator">&gt;</span>
+            {% endblock %}
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}
