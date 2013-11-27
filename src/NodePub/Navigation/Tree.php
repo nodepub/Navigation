@@ -50,6 +50,8 @@ class Tree implements \IteratorAggregate, \ArrayAccess
     public function setValue($value)
     {
         $this->value = $value;
+        
+        return $this;
     }
 
     /**
@@ -70,6 +72,8 @@ class Tree implements \IteratorAggregate, \ArrayAccess
     public function setParent(Tree $parent)
     {
         $this->parent = $parent;
+        
+        return $this;
     }
 
     /**
@@ -88,6 +92,8 @@ class Tree implements \IteratorAggregate, \ArrayAccess
     public function setAttribute($key, $value)
     {
         $this->attributes[$key] = $value;
+        
+        return $this;
     }
 
     /**
@@ -97,11 +103,15 @@ class Tree implements \IteratorAggregate, \ArrayAccess
      */
     public function getAttribute($key, $default = null)
     {
-        if (isset($this->attributes[$key])) {
-            return $this->attributes[$key];
-        }
-
-        return $default;
+        return (isset($this->attributes[$key])) ? $this->attributes[$key] : $default;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
     /**
@@ -153,6 +163,14 @@ class Tree implements \IteratorAggregate, \ArrayAccess
     public function hasChildren()
     {
         return $this->nodeCount() > 0;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getChildren()
+    {
+        return $this->nodes;
     }
   
     /**
@@ -257,7 +275,7 @@ class Tree implements \IteratorAggregate, \ArrayAccess
         $node->setParent($this);
         $this->nodes[] = $node;
         
-        return $node;
+        return $this;
     }
 
     /**

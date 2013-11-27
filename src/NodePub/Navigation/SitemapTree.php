@@ -11,7 +11,7 @@ class SitemapTree extends Tree implements \Serializable
 {
     const ATTR_IS_ACTIVE = 'isActive';
     const ATTR_IS_ACTIVE_PARENT = 'isActiveParent';
-    const ATTR_HREF = 'href';
+    const ATTR_PATH = 'path';
     const ATTR_SLUG = 'slug';
     const ATTR_IS_ROOT = 'isRoot';
   
@@ -19,14 +19,16 @@ class SitemapTree extends Tree implements \Serializable
     # Accessors                                                                    #
     # ============================================================================ #
     
-    public function setHref($href)
+    public function setPath($path)
     {
-        $this->setAttribute(self::ATTR_HREF, $href);
+        $this->setAttribute(self::ATTR_PATH, $path);
+        
+        return $this;
     }
     
-    public function getHref()
+    public function getPath()
     {
-        return $this->getAttribute(self::ATTR_HREF, '');
+        return $this->getAttribute(self::ATTR_PATH, '');
     }
     
     public function isActive()
@@ -45,6 +47,8 @@ class SitemapTree extends Tree implements \Serializable
         if ($parent = $this->getParent()) {
             $parent->setIsActive($value);
         }
+        
+        return $this;
     }
     
     /**
@@ -53,6 +57,8 @@ class SitemapTree extends Tree implements \Serializable
     public function setName($name)
     {
         $this->value = $name;
+        
+        return $this;
     }
     
     /**
@@ -66,6 +72,8 @@ class SitemapTree extends Tree implements \Serializable
     public function setSlug($slug)
     {
         $this->setAttribute(self::ATTR_SLUG, $slug);
+        
+        return $this;
     }
     
     public function getSlug()
@@ -76,6 +84,8 @@ class SitemapTree extends Tree implements \Serializable
     public function setIsRoot($value)
     {
         $this->setAttribute(self::ATTR_IS_ROOT, (bool) $value);
+        
+        return $this;
     }
     
     public function isRoot()
@@ -117,7 +127,7 @@ class SitemapTree extends Tree implements \Serializable
         if (!$node->isRoot()) {
             $nodeArray = array(
                 'name' => $this->getName(),
-                'href' => $this->getHref()
+                'path' => $this->getPath()
             );
             
             if ($this->hasChildren()) {

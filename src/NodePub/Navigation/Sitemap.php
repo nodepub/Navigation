@@ -12,9 +12,14 @@ class Sitemap
               $activeNode
               ;
   
-    function __construct(SitemapLoader $loader)
+    // function __construct(SitemapLoader $loader)
+    // {
+    //     $this->tree = $loader->load();
+    // }
+    
+    function __construct($tree)
     {
-        $this->tree = $loader->load();
+        $this->tree = $tree;
     }
     
     /**
@@ -33,7 +38,7 @@ class Sitemap
         $this->activePath = $path;
         $nodes = $this->tree->getFlatList();
         foreach ($nodes as $node) {
-            if ($node->getHref() == $path) {
+            if ($node->getPath() == $path) {
                 $node->setIsActive(true);
                 $this->activeNode = $node;
                 break;
@@ -46,12 +51,16 @@ class Sitemap
         return $this->activeNode;
     }
 
+    /**
+     * Returns an array of the active node and all its parent nodes,
+     * for rendering breadcrumbs, etc.
+     */
     public function getActiveNodes()
     {
         $nodes = array();
         $node = $this->activeNode;
 
-         while ($node->getParent() instanceof SitemapTree) {
+        while ($node->getParent() instanceof SitemapTree) {
             $nodes[]= $node;
             $node = $node->getParent();
         }

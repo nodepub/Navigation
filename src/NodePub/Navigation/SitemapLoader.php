@@ -15,8 +15,8 @@ class SitemapLoader
   
     function __construct($configFile, $cacheFile)
     {
-        $this->cacheFile = $cacheFile;
         $this->configFile = $configFile;
+        $this->cacheFile = $cacheFile;
     }
     
     /**

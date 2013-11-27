@@ -8,7 +8,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class NavigationTwigExtension extends \Twig_Extension
 {
     protected $twigEnvironment,
-              $sitemap;
+              $sitemap,
+              $twigLoader;
 
     public function __construct(Sitemap $sitemap)
     {
@@ -18,9 +19,13 @@ class NavigationTwigExtension extends \Twig_Extension
     public function initRuntime(\Twig_Environment $environment)
     {
         $this->twigEnvironment = $environment;
-        $loader = $environment->getLoader();
-        $loader->addSource(__DIR__.'../Resorces/views');
+        
+        $loader = new \Twig_Loader_Filesystem();
+        $loader->addPath(__DIR__ . '/../Resorces/views', 'np_navigation');
+        
+        $environment->getLoader()->addLoader($loader);
     }
+    
 
     public function getName()
     {
@@ -38,13 +43,15 @@ class NavigationTwigExtension extends \Twig_Extension
 
     public function menu()
     {
-        return $this->twigEnvironment->render('menu.twig', array());
+        return $this->twigEnvironment->render('@np_navigation\menu.twig', array());
     }
 
-    // returns rendered string
+    /**
+     * Returns rendered string
+     */
     public function breadcrumbs($separator)
     {
-        return $this->twigEnvironment->render('breadcrumbs.twig', array(
+        return $this->twigEnvironment->render('@np_navigation\breadcrumbs.twig', array(
             'breadcrumb_items' => $this->sitemap->getActiveNodes()
         ));
     }
